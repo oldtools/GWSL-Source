@@ -1,6 +1,20 @@
-name: Pylint
+# This is a basic workflow that is manually triggered
 
-on: [ push ]
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Build a GWSL Release'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
 
 jobs:
   build:
@@ -16,7 +30,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pylint
           pip install pygame
           pip install pywin32
           pip install winshell
@@ -28,7 +41,7 @@ jobs:
       - name: Analysing the code with pylint
         run: |
           pylint manager.py main.py animator.py blur.py exe_layer.py GWSL_ssh.py iset.py OpticUI.py wsl_tools.py
-       - name: Building GWSL_service...
+      - name: Building GWSL_service...
         run: |
           echo "pyinstaller"
           #python pyinstaller.....
@@ -42,4 +55,4 @@ jobs:
         run: |
           echo "pyinstaller"
       - name: Upload
-        run: git add ${{github.workspace}} && git commit -m "Uploaded build" && git push  
+        run: git add ${{github.workspace}} && git commit -m "Uploaded build" && git push
