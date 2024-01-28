@@ -24,6 +24,7 @@ jobs:
           pip install imtools
           pip install infi.systray
           pip install keyboard
+          pip install https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
       - name: Analysing the code with pylint
         run: |
           pylint manager.py main.py animator.py blur.py exe_layer.py GWSL_ssh.py iset.py OpticUI.py wsl_tools.py
